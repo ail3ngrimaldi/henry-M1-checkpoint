@@ -24,7 +24,7 @@ const {
 // Aclaraciones:
 //   - Un objeto anidado es un objeto que dentro tiene uno o más objetos.
 //     Ej:
-//        const user = {
+//        const user = {         Ejemplo: user.infoPersonal.nombre
 //            id: 6,
 //            email: 'homero@maxpower.com',
 //            infoPersonal: {
@@ -42,10 +42,19 @@ const {
 // Pista: utilizar typeof para determinar si el valor de una propiedad es un objeto para aplicar
 // allí la recursión
 
-var objContains = function(obj, prop, value){
- 
-}
-
+var objContains = function buscar(obj, key, value){
+  debugger;
+  for (var prop in obj) {
+    if (typeof obj[prop] !== 'object') {
+      if (prop === key && obj[prop] === value){
+        return true;
+      }    
+    } else {
+      return buscar(obj[prop], key, value);
+    }
+  }
+  return false;
+ }
 
 // EJERCICIO 2
 // Implementar la función countArray: a partir de un array en el cual cada posición puede ser un único
@@ -57,8 +66,27 @@ var objContains = function(obj, prop, value){
 // Pista: utilizar el método Array.isArray() para determinar si algun elemento de array es un array anidado
 // [Para más información del método: https://developer.mozilla.org/es/docs/Web/JavaScript/Referencia/Objetos_globales/Array/isArray]
 
-var countArray = function(array){
+var countArray = function sumar(array){
+  //[10, 20, [300,400], 40, 50]
+
+  if (array.length === 0){
+    return 0;
+  }
   
+  var acumulador = 0;
+
+  for (var i = 0; i < array.length; i++) {  
+    
+    if (!Array.isArray(array[i])) {
+      acumulador = acumulador + array[i];
+    }  else {
+      var resultado = sumar(array[i]);
+      acumulador = resultado + acumulador;      
+    }
+  
+  }
+
+  return acumulador;
 }
 
 // ---------------------
@@ -78,6 +106,12 @@ var countArray = function(array){
 //    lista.size(); --> 3
 
 LinkedList.prototype.size = function(){
+  if (LinkedList.prototype.length === 0) {
+    return 0;
+  } else {
+     (LinkedList.prototype.length >= 1)
+     return LinkedList.prototype.length;
+  }
  
 }
 
@@ -217,7 +251,9 @@ var selectionSort = function(array) {
 //    sumaDiez(11); --> Devolverá 21 (Ya que 11 + 10 = 21)
 
 function closureSum(numFijo) {
- 
+    if(numFijo === array.length === []) {
+      return [];
+  } 
 }
 
 // -------------------
