@@ -9,11 +9,11 @@
 
 * Closures: Se utiliza para asignarle diferentes valores a las variables y que estas tengan ese valor dentro del contexto de cada funcion, fuera de este no se podran usar con ese valor ni modificar. Tambien se puede declarar el valor de una variable en el contexto global, para poder acceder a este o modificarlo en este.
 
-* Contexto de Ejecución:
+* Contexto de Ejecución: Es el contexto actual que toma javascript donde ejecuta las lineas de codigo que va leyendo y segun los tipos de datos que declaramos los guarda en su espacio de memoria. Sirve para diferenciar definiciones de variables, funciones, objetos, y ver en que momento de ejecucion del codigo se ejecutara cada una.**
 
-* Variable THIS:
+* Variable THIS: Se refiere siempre a algo que ***
 
-* Hoisting:
+* Hoisting: Es un proceso que lleva a cabo Javascript para las funciones y variables que declaramos. Lo que hace es guardar en su memoria un espacio para determinados datos, que pueden ser dotados de valor luego, es decir que c
 
 * Pasar por valor y por referencia: 
 

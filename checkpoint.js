@@ -67,7 +67,6 @@ var objContains = function buscar(obj, key, value){
 // [Para más información del método: https://developer.mozilla.org/es/docs/Web/JavaScript/Referencia/Objetos_globales/Array/isArray]
 
 var countArray = function sumar(array){
-  //[10, 20, [300,400], 40, 50]
 
   if (array.length === 0){
     return 0;
@@ -105,14 +104,15 @@ var countArray = function sumar(array){
 //    lista.add(3);
 //    lista.size(); --> 3
 
+
 LinkedList.prototype.size = function(){
-  if (LinkedList.prototype.length === 0) {
-    return 0;
-  } else {
-     (LinkedList.prototype.length >= 1)
-     return LinkedList.prototype.length;
-  }
- 
+    var contador = 0;
+    var current = this.head;
+    while (current !== null) {
+      contador = contador + 1;
+      current = current.next;
+    }
+    return contador;
 }
 
 
@@ -125,7 +125,7 @@ LinkedList.prototype.size = function(){
 // Aclaración: la posición cero corresponde al head de la LinkedList
 // Ejemplo 1:
 //    Suponiendo que la lista actual es: Head --> [1] --> [2] --> [4]
-//    lista.addInPos(2, 3);
+//    lista.addInPos(2, 3) ;
 //    Ahora la lista quedaría: Head --> [1] --> [2] --> [3] --> [4]
 // Ejemplo 2:
 //    Suponiendo que la lista está vacía: Head --> null
@@ -133,6 +133,24 @@ LinkedList.prototype.size = function(){
 //    sin antes tener cargada la posición 0 y 1.
 
 LinkedList.prototype.addInPos = function(pos, value){
+  var nodo = new Node(value);
+    
+  var contador = 0;
+  
+  var current = this.head;
+  while (current !== null) {
+     
+     contador = contador + 1;
+     if (pos == contador){
+       var nodoDesplazado = current.next;
+       current.next = nodo; 
+       nodo.next = nodoDesplazado;
+       return true;   
+     }
+
+     current = current.next;
+  }
+  return false;
   
 }
 
@@ -230,10 +248,23 @@ var binarySearch = function (array, target) {
 //    - https://www.khanacademy.org/computing/computer-science/algorithms/sorting-algorithms/a/sorting
 // Ejemplo:
 //     selectionSort([1, 6, 2, 5, 3, 4]) --> [1, 2, 3, 4, 5, 6]
-
-
 var selectionSort = function(array) {
-  
+  for (var i = 0; i < array.length; i++) {
+    var min = i;
+    for (var j = i + 1; j < array.length; j++) {
+      if (array[j] < array[min]) {
+        min = j;
+      }
+  }
+  if (min !== i) {
+    var aux = array[i];
+    array[i] = array[min];
+    array[min] = aux
+  }
+}
+
+return array;
+
 }
 
 // ----- Closures -----
@@ -251,9 +282,10 @@ var selectionSort = function(array) {
 //    sumaDiez(11); --> Devolverá 21 (Ya que 11 + 10 = 21)
 
 function closureSum(numFijo) {
-    if(numFijo === array.length === []) {
-      return [];
-  } 
+  return function (segundoNumero) {
+    suma = numFijo + segundoNumero;
+    return suma;
+  }
 }
 
 // -------------------
