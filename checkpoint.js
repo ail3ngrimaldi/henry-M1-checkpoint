@@ -151,7 +151,7 @@ LinkedList.prototype.addInPos = function(pos, value){
      current = current.next;
   }
   return false;
-  
+n    
 }
 
 // EJERCICIO 5
@@ -190,11 +190,40 @@ LinkedList.prototype.reverse = function(){
 //    Primer mano:
 //     A --> 4  vs  6 <-- B [6 > 4 entones gana la mano B y pone ambas cartas en su mazo, colocando primero la suya]
 //    - mazoUserA = [2,10,11]
-//    - mazoUserB = [6,9,10,3,6,4]
+//    - mazoUserB = [9,10,3,6,4]
 
-var cardGame = function(mazoUserA, mazoUserB){
+var cardGame = function(mazoUserACola, mazoUserBCola){
+
+  while (mazoUserBCola.size() !== 0 && mazoUserACola.size() !== 0) {
+
+    var cartaDeEstaManoDeA = mazoUserACola.dequeue();
+    var cartaDeEstaManoDeB = mazoUserBCola.dequeue();
+
+    if (cartaDeEstaManoDeA > cartaDeEstaManoDeB) {
+        mazoUserACola.enqueue(cartaDeEstaManoDeA);
+        mazoUserACola.enqueue(cartaDeEstaManoDeB);
+
+    } else if (cartaDeEstaManoDeA < cartaDeEstaManoDeB) {
+        mazoUserBCola.enqueue(cartaDeEstaManoDeB);
+        mazoUserBCola.enqueue(cartaDeEstaManoDeA);
+    }
+
+  } 
+  
+  if (mazoUserACola.size() > mazoUserBCola.size()) {
+      return 'A wins!';
+  } else if (mazoUserACola.size() < mazoUserBCola.size()) {
+      return 'B wins!';
+  } else {
+      return 'Game tie!';
+  }
 
 }
+
+
+
+
+
 
 // ---------------
 
@@ -216,7 +245,52 @@ var cardGame = function(mazoUserA, mazoUserB){
 //       5
 
 var generateBST = function(array){
- 
+
+  function Node(value) {
+    this.value = value; 
+    this.left = null; 
+    this.right = null; 
+  }
+  
+  function BinarySearchTree(){
+    this.root = null;
+  }
+  
+  BinarySearchTree.prototype.insert = function(value) 
+  { 
+    var newNode = new Node(value); 
+                      
+    if (this.root === null) 
+      this.root = newNode; 
+    else
+      this.insertNode(this.root, newNode);
+  } 
+  
+  BinarySearchTree.prototype.insertNode = function (node, newNode)
+  { 
+    if(newNode.value < node.value) 
+    { 
+      if(node.left === null) 
+        node.left = newNode; 
+      else
+        this.insertNode(node.left, newNode);  
+    } 
+    else { 
+        if(node.right === null) 
+          node.right = newNode; 
+        else
+          this.insertNode(node.right, newNode); 
+    } 
+  }
+
+
+  var tree = new BinarySearchTree();
+  
+  for (var i = 0; i < array.length; i++) {
+    tree.insert(array[i]);
+  }
+
+  return tree.root;
 }
 
 
